@@ -11,7 +11,11 @@ public class EnemyController : MonoBehaviour
     int attackID = Animator.StringToHash("Attack1");
     NavMeshAgent _agent;
     public float moveSpeed;
-
+    public AudioClip swingSound;
+    public AudioClip deathSound;
+    public AudioClip alienNoises;
+    public AudioClip takeDamage;
+    public AudioClip sandFootsteps;
 
     // Start is called before the first frame update
     void Start()
@@ -35,24 +39,36 @@ public class EnemyController : MonoBehaviour
            {   
                 //Face target
                 FaceTarget();
-
+                AudioManager.instance.RandomizeSfx(sandFootsteps);
+                AudioManager.instance.RandomizeSfx(alienNoises);
                 //Attack target
                 Attack();
            }
         }
+        else
+        {
+            _animator.SetTrigger("idle");
+        }
     }
 
-    void FaceTarget()
-    {
+    private void FaceTarget()
+    {   
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime*5f);
     }
 
     //triggers attack animation
-    void Attack()
-    {
+    private void Attack()
+    {     
         _animator.SetTrigger("attack_1");
+        swingEffects();
+    }
+
+    private  void swingEffects()
+    {
+        this.GetComponent<AudioSource>().PlayDelayed(.03f);
+        
     }
 
     private void OnDrawGizmos()
