@@ -18,8 +18,8 @@ public class Torch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float phi = Time.time / duration * 2 * Mathf.PI;
-        float amplitude = Mathf.Cos(phi) * 0.5F + 0.5F;
-        lt.intensity = amplitude;
+        float glow = (torchGlow/100)*0.75F;
+        lt.intensity = glow;
+        torchGlow = torchGlow - 0.05F;
     }
 }
