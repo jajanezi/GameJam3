@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Enemy : Interactable
 {
-    PlayerManager playerManager;
+    //PlayerManager playerManager;
     CharacterStats myStats;
 
     void Start()
     {
-        playerManager = PlayerManager.instance;
+       // playerManager = PlayerManager.instance;
         myStats = GetComponent<CharacterStats>();
     }
 

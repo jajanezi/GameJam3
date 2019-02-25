@@ -54,6 +54,6 @@ public class AudioManager : MonoBehaviour
         efxSource.clip = clips[randomIndex];
 
         //Play the clip.
-        efxSource.Play();
+        efxSource.PlayDelayed(.05f);
     }
 }

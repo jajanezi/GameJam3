@@ -33,29 +33,28 @@ public class EnemyController : MonoBehaviour
         if(distance <= lookRadius)
         {
             _agent.SetDestination(target.position);
-            _animator.SetBool("run", moveSpeed > 0);
-
+            _animator.SetBool("run", _agent.hasPath);
+            
             if (distance <= _agent.stoppingDistance)
            {   
                 //Face target
                 FaceTarget();
-                AudioManager.instance.RandomizeSfx(sandFootsteps);
-                AudioManager.instance.RandomizeSfx(alienNoises);
                 //Attack target
                 Attack();
            }
+            AudioManager.instance.RandomizeSfx(sandFootsteps, alienNoises);
         }
-        else
-        {
-            _animator.SetTrigger("idle");
-        }
+
     }
+
+        
+    
 
     private void FaceTarget()
     {   
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime*5f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime*5f);  
     }
 
     //triggers attack animation
@@ -67,8 +66,7 @@ public class EnemyController : MonoBehaviour
 
     private  void swingEffects()
     {
-        this.GetComponent<AudioSource>().PlayDelayed(.03f);
-        
+        this.GetComponent<AudioSource>().PlayDelayed(.0005f);
     }
 
     private void OnDrawGizmos()
