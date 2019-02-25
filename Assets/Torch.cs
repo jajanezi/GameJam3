@@ -6,13 +6,22 @@ using UnityEngine.UI;
 public class Torch : MonoBehaviour
 {
     public float duration = 1.0F;
+    public BoxCollider box;
     public Light lt;
+    private Rigidbody myRigidBody;
     float torchTimer;
     float torchGlow = 100;
     // Start is called before the first frame update
+
     void Start()
     {
-        lt = GetComponent<Light>();
+        myRigidBody = GetComponent<Rigidbody>();
+        GameObject fire = GameObject.FindWithTag("fireplace");
+        GameObject light = GameObject.FindWithTag("MainCamera");
+        lt = light.GetComponent<Light>();
+        box = fire.GetComponent<BoxCollider>();
+        box.isTrigger = true;
+
     }
 
     // Update is called once per frame
@@ -22,4 +31,13 @@ public class Torch : MonoBehaviour
         lt.intensity = glow;
         torchGlow = torchGlow - 0.05F;
     }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.name == "fireplace")
+        {
+            torchGlow = 100;
+        }
+    }
+
 }
