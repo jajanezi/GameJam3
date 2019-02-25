@@ -11,6 +11,7 @@ public class Torch : MonoBehaviour
     private Rigidbody myRigidBody;
     float torchTimer;
     float torchGlow = 100;
+    float health = 100;
     // Start is called before the first frame update
 
     void Start()
@@ -37,6 +38,18 @@ public class Torch : MonoBehaviour
         if (collision.gameObject.name == "fireplace")
         {
             torchGlow = 100;
+        }
+       
+    }
+
+    void OnTriggerStay(Collider collision)
+    {
+        if (Input.GetKey(KeyCode.Z))
+        {
+            if (collision.gameObject.tag == "log")
+            {
+                Destroy(collision.gameObject);
+            }
         }
     }
 
