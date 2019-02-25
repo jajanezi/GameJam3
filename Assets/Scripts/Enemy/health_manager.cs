@@ -20,7 +20,7 @@ public class health_manager : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         //Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag == "ammo")
+        if (other.gameObject.tag == "axe")
         {
 
             //Debug.Log("Hit Something!");
@@ -34,7 +34,7 @@ public class health_manager : MonoBehaviour {
         }
         else
         {
-            Debug.Log("not shot!");
+            Debug.Log("not hit!");
         }
         
     }
