@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     private Animator _animator;
-    public float lookRadius = 10f;
+    public float lookRadius = 5f;
     public Transform target;
     int attackID = Animator.StringToHash("Attack1");
     NavMeshAgent _agent;
@@ -49,6 +49,7 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime*5f);
     }
 
+    //triggers attack animation
     void Attack()
     {
         _animator.SetTrigger("attack_1");
