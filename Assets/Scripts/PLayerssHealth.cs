@@ -53,12 +53,13 @@ public class PLayerssHealth : MonoBehaviour
     public virtual void Die()
     {
         Destroy(gameObject);
+        SimpleMenu.instance.Dead();
     }
 
     void OnTriggerEnter(Collider other)
     {
         //Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "axe")
         {
 
             //Debug.Log("Hit Something!");

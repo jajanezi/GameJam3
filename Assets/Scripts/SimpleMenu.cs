@@ -15,7 +15,18 @@ public class SimpleMenu : MonoBehaviour
     public TextMeshProUGUI deathText;
     public AudioClip deathNoise;
 
-     void Start()
+    #region Singleton
+
+    public static SimpleMenu instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    #endregion
+
+    void Start()
     {
         startMenu.SetActive(true);
     }
