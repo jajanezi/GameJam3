@@ -11,6 +11,8 @@ public class EnemyController : MonoBehaviour
     int attackID = Animator.StringToHash("Attack1");
     NavMeshAgent _agent;
     public float moveSpeed;
+    private float swingDelay;
+    private float counter;
     public AudioClip swingSound;
     public AudioClip deathSound;
     public AudioClip alienNoises;
@@ -30,25 +32,23 @@ public class EnemyController : MonoBehaviour
     {
         float distance = Vector3.Distance(target.position, transform.position);
 
+        counter = Time.deltaTime;
         if(distance <= lookRadius)
         {
             _agent.SetDestination(target.position);
             _animator.SetBool("run", _agent.hasPath);
-            
+
+            AudioManager.instance.RandomizeSfx(sandFootsteps);
+
             if (distance <= _agent.stoppingDistance)
            {   
                 //Face target
                 FaceTarget();
                 //Attack target
                 Attack();
-           }
-            AudioManager.instance.RandomizeSfx(sandFootsteps, alienNoises);
+           } 
         }
-
     }
-
-        
-    
 
     private void FaceTarget()
     {   
@@ -59,9 +59,12 @@ public class EnemyController : MonoBehaviour
 
     //triggers attack animation
     private void Attack()
-    {     
-        _animator.SetTrigger("attack_1");
-        swingEffects();
+    {
+        if (counter > swingDelay) {
+            _animator.SetTrigger("attack_1");
+            swingEffects();
+            counter = 0;
+        }
     }
 
     private  void swingEffects()

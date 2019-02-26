@@ -29,12 +29,12 @@ public class Torch : MonoBehaviour
         GameObject fire = GameObject.Find("fireplace");
         Campfire flame = fire.GetComponent<Campfire>();
         GameObject light = GameObject.FindWithTag("MainCamera");
-        GameObject axe = GameObject.FindWithTag("axe");
+
         lt = light.GetComponent<Light>();
         box = fire.GetComponent<BoxCollider>();
         box.isTrigger = true;
         add = light.GetComponent<AudioSource>();
-        hit = axe.GetComponent<AudioSource>();
+        
     }
 
     // Update is called once per frame
@@ -73,7 +73,7 @@ public class Torch : MonoBehaviour
                 flame.torchHealth = flame.torchHealth + 2.5F;
                 Destroy(collision.gameObject);
             }
-            else if (collision.gameObject.tag == "monster")
+            else if (collision.gameObject.tag == "Enemy")
             {
                 hit.Play();
                 Destroy(collision.gameObject);
