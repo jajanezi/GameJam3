@@ -23,11 +23,11 @@ public class SimpleMenu : MonoBehaviour
 
     void Update()
     {
-      //  if (Input.GetKeyDown(KeyCode.Escape))
-      //    {
-      //      Exit();
-       // }
-        if(moon.position == endCondition)
+      // if (Input.GetKeyDown(KeyCode.Escape))
+     //   {
+     //       Exit();
+    //    }
+        if(Time.deltaTime == 200f)
         {
             Time.timeScale = 0;
             gameGUI.SetActive(false);
