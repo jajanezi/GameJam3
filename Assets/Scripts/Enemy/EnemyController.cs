@@ -14,7 +14,6 @@ public class EnemyController : MonoBehaviour
     private float swingDelay;
     private float counter;
     public AudioClip swingSound;
-    public AudioClip deathSound;
     public AudioClip alienNoises;
     public AudioClip takeDamage;
     public AudioClip sandFootsteps;
@@ -54,7 +53,9 @@ public class EnemyController : MonoBehaviour
     {   
         Vector3 direction = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime*5f);  
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime*5f);
+        AudioManager.instance.RandomizeSfx(alienNoises, null);
+
     }
 
     //triggers attack animation

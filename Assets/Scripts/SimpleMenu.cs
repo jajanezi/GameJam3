@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class SimpleMenu : MonoBehaviour
 {
     public GameObject startMenu;
     public GameObject gameGUI;
     public GameObject endMenu;
+    public Transform moon;
+    private Vector3 endCondition = new Vector3(0, 500, 0);
     private int counter;
+    public TextMeshProUGUI deathText;
+    public AudioClip deathNoise;
 
      void Start()
     {
@@ -18,19 +23,15 @@ public class SimpleMenu : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return) && counter == 0)
+      //  if (Input.GetKeyDown(KeyCode.Escape))
+      //    {
+      //      Exit();
+       // }
+        if(moon.position == endCondition)
         {
-            startMenu.SetActive(false);
-            gameGUI.SetActive(true);
-            counter++;
-        }
-        else if (Input.GetKeyDown(KeyCode.Return) && counter >= 0)
-        {
-            Restart();
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Exit();
+            Time.timeScale = 0;
+            gameGUI.SetActive(false);
+            endMenu.SetActive(true);
         }
     }
 
@@ -53,6 +54,16 @@ public class SimpleMenu : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
+    }
+
+    public void Dead()
+    {
+        AudioManager.instance.RandomizeSfx(deathNoise);
+        Time.timeScale = 0;
+        gameGUI.SetActive(false);
+        deathText.SetText("You Died. Sorry.");
+        endMenu.SetActive(true);
+
     }
    
 }

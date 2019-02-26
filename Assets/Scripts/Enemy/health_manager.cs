@@ -6,6 +6,8 @@ public class health_manager : MonoBehaviour {
 
 	public int health = 10;
     public int damage = 10;
+    public AudioClip deathSound;
+    private Animator anim;
 
     public void doDamage(int damage)
 	{
@@ -13,14 +15,16 @@ public class health_manager : MonoBehaviour {
 	}
 
     public virtual void Die()
-    { 
+    {
+        anim.SetTrigger("death");
         Destroy(gameObject);
+        AudioManager.instance.RandomizeSfx(deathSound);
     }
 
     void OnTriggerEnter(Collider other)
     {
         //Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag == "axe")
+        if (other.gameObject.tag == "Player")
         {
 
             //Debug.Log("Hit Something!");

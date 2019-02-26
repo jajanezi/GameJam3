@@ -68,13 +68,9 @@ public class DetectingLogs : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.tag == "DeadLog")
+                if (hit.transform.tag == "log")
                 {
-                    Debug.Log("This is a Dead Log");
-                }
-                else if (hit.transform.tag ==  "AliveLog")
-                {
-                    Debug.Log("This is an Alive Log");
+                    Debug.Log("This is a Log");
                 }
 
             }
